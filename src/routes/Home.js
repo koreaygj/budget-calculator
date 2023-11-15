@@ -1,39 +1,42 @@
 import { useEffect, useState } from "react";
-import Travel from "../components/Travel";
+import TravelList from "../components/TravelList";
 
 function Home() {
-  const [travelList, setTravelList] = useState([]);
+  const [travelList, setTravelList] = useState(() => {
+    const savedList = JSON.parse(localStorage.getItem("TravelList"));
+    return savedList !== null ? savedList : [];
+  });
   const addTravelPlan = (event) => {
     event.preventDefault();
-    setTravelList((prev) => [...prev, event.target[0].value]);
-    saveTravelList();
+    newDestination(event.target[0].value);
+    event.target[0].value = "";
   };
-  const saveTravelList = () => {
+  const newDestination = (getName) => {
+    const destination = {
+      id: Date.now(),
+      name: getName,
+    };
+    setTravelList((prev) => [...prev, destination]);
+  };
+  const saveLocalStorage = () => {
     localStorage.setItem("TravelList", JSON.stringify(travelList));
   };
   useEffect(() => {
-    const savedTravelList = JSON.parse(localStorage.getItem("TravelList"));
-    setTravelList(() => {
-      return savedTravelList;
-    });
-  }, []);
+    saveLocalStorage();
+  }, [travelList]);
   return (
     <div>
       <h1>Travel List</h1>
       <div className="travel-container">
         <form onSubmit={addTravelPlan}>
           <input
-            className="travel-title"
+            required
             type="text"
             placeholder="insert travel destination"
           ></input>
           <button>submit</button>
         </form>
-        <div className="travel-list">
-          {travelList.map((destination) => (
-            <Travel destination={destination} key={destination.id} />
-          ))}
-        </div>
+        <TravelList travelList={travelList} />
         <button>Delete All</button>
       </div>
     </div>

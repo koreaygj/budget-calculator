@@ -1,44 +1,37 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function Travel({ destination, key }) {
-  const [isDelete, setIsDelete] = useState(false);
+function Travel({ name, id }) {
+  const [getName, setName] = useState(name);
+  const savedList = JSON.parse(localStorage.getItem("TravelList"));
   const [isEdit, setIsEdit] = useState(false);
-  const [getTitle, setTitle] = useState("");
-  const savedLocalStorage = JSON.parse(localStorage.getItem("TravelList"));
-  const editTitle = () => {
-    setIsEdit((prev) => !prev);
-  };
-  const saveTitle = () => {
-    setIsEdit((prev) => !prev);
-  };
-  const saveDestination = () => {
-    localStorage.setItem("TravelList", JSON.stringify(savedLocalStorage));
-  };
-  const deleteTitle = (event) => {
-    const div = event.target.parentElement;
-    setIsDelete(() => {
-      return true;
+  const saveChanges = (event) => {
+    toggleEdit();
+    const editedName = event.target.parentElement.childNodes[0].value;
+    setName(() => editedName);
+    savedList.map((destination) => {
+      if (destination.id === id) {
+        destination.name = editedName;
+      }
     });
-
-    const updateLocalStorage = savedLocalStorage.filter(
-      (destination) => destination !== div.id
-    );
-    saveDestination(updateLocalStorage);
+    updateLocalStorage();
   };
-  useEffect(() => {
-    setTitle(() => destination);
-  }, []);
+  const updateLocalStorage = () => {
+    localStorage.setItem("TravelList", JSON.stringify(savedList));
+  };
+  const toggleEdit = () => {
+    setIsEdit((prev) => !prev);
+  };
   return isEdit ? (
-    <div id={getTitle} key={key} hidden={isDelete}>
-      <input type="text" value={getTitle}></input>
-      <button onClick={saveTitle}>save</button>
-      <button onClick={deleteTitle}>delete</button>
+    <div id={id}>
+      <input defaultValue={getName}></input>
+      <button onClick={saveChanges}>save</button>
+      <button>Delete</button>
     </div>
   ) : (
-    <div id={getTitle} key={key} hidden={isDelete}>
-      <a href={`/travel/${getTitle}`}>{getTitle}</a>
-      <button onClick={editTitle}>edit</button>
-      <button onClick={deleteTitle}>delete</button>
+    <div>
+      <a href={`./travel/${getName}`}>{getName}</a>
+      <button onClick={toggleEdit}>edit</button>
+      <button>Delete</button>
     </div>
   );
 }
