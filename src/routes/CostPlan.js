@@ -30,6 +30,8 @@ function CostPlan() {
   const addCostPlan = (event) => {
     event.preventDefault();
     costPlan(event.target[0].value, event.target[1].value);
+    event.target[0].value = "";
+    event.target[1].value = "";
   };
 
   const costPlan = (title, cost) => {
