@@ -10,10 +10,7 @@ function CostPlan() {
     show: false,
     message: "",
   });
-  const [costDetails, setCostDetails] = useState(() => {
-    const savedList = JSON.parse(localStorage.getItem(`CostDetails${id}`));
-    return savedList !== null ? savedList : [];
-  });
+  const [costDetails, setCostDetails] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
 
   const showAlert = (message) => {
@@ -36,6 +33,7 @@ function CostPlan() {
   };
 
   const costPlan = (title, cost) => {
+    getLocalStorage();
     const costPlan = {
       id: Date.now(),
       title: title,
@@ -44,6 +42,10 @@ function CostPlan() {
     setCostDetails((prev) => [...prev, costPlan]);
     showAlert("추가");
   };
+  const getLocalStorage = () => {
+    setCostDetails(JSON.parse(localStorage.getItem(`CostDetails${id}`)));
+  };
+
   const saveLocalStorage = () => {
     localStorage.setItem(`CostDetails${id}`, JSON.stringify(costDetails));
   };
@@ -59,6 +61,10 @@ function CostPlan() {
   useEffect(() => {
     saveLocalStorage();
   }, [costDetails]);
+
+  useEffect(() => {
+    getLocalStorage();
+  }, []);
 
   return (
     <div className={styles.mainView}>

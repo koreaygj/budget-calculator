@@ -20,7 +20,7 @@ function CostDetail({ title, cost, id, onEdit, onRemove }) {
       <input defaultValue={title}></input>
       <input defaultValue={cost} type="number"></input>
       <div>
-        <button onClick={saveChanges}>save</button>
+        <button onClick={saveChanges}>Save</button>
         <button onClick={() => onRemove(id)}>Delete</button>
       </div>
     </div>

@@ -20,7 +20,7 @@ function Travel({ name, id, onEdit, onRemove }) {
     <div className={styles.editTravelList} id={id}>
       <input defaultValue={name}></input>
       <div>
-        <button onClick={saveChanges}>save</button>
+        <button onClick={saveChanges}>Save</button>
         <button onClick={() => onRemove(id)}>Delete</button>
       </div>
     </div>

@@ -35,7 +35,8 @@
 
 .editCostDetail button {
   border: none;
-  font-size: 13px;
+  margin: 3px;
+  font-size: 15px;
   border-radius: 3px;
   background-color: #b0a695;
   color: #f9f9f9;

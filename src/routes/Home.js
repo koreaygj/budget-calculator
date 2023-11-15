@@ -8,10 +8,7 @@ function Home() {
     show: false,
     message: "",
   });
-  const [travelList, setTravelList] = useState(() => {
-    const savedList = JSON.parse(localStorage.getItem("TravelList"));
-    return savedList !== null ? savedList : [];
-  });
+  const [travelList, setTravelList] = useState([]);
 
   const showAlert = (message) => {
     setAlert({
@@ -30,13 +27,19 @@ function Home() {
     newDestination(event.target[0].value);
     event.target[0].value = "";
     showAlert("add");
+    console.log(travelList);
   };
   const newDestination = (getName) => {
+    getLocalStorage();
     const destination = {
       id: Date.now(),
       name: getName,
     };
     setTravelList((prev) => [...prev, destination]);
+  };
+
+  const getLocalStorage = () => {
+    setTravelList(JSON.parse(localStorage.getItem("TravelList")));
   };
   const saveLocalStorage = () => {
     localStorage.setItem("TravelList", JSON.stringify(travelList));
@@ -48,6 +51,9 @@ function Home() {
   useEffect(() => {
     saveLocalStorage();
   }, [travelList]);
+  useEffect(() => {
+    getLocalStorage();
+  }, []);
   return (
     <div className={styles.mainView}>
       <h1 className={styles.title}>Travel List</h1>
