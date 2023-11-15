@@ -1,11 +1,14 @@
 import { useState } from "react";
+import styles from "./styles/CostDetails.module.css";
 
 function CostDetail({ title, cost, id, onEdit, onRemove }) {
   const [isEdit, setIsEdit] = useState(false);
   const saveChanges = (event) => {
     toggleEdit();
-    const editedTitle = event.target.parentElement.childNodes[0].value;
-    const editedCost = event.target.parentElement.childNodes[1].value;
+    const editedTitle =
+      event.target.parentElement.parentElement.childNodes[0].value;
+    const editedCost =
+      event.target.parentElement.parentElement.childNodes[1].value;
     return onEdit(id, editedTitle, editedCost);
   };
 
@@ -13,18 +16,22 @@ function CostDetail({ title, cost, id, onEdit, onRemove }) {
     setIsEdit((prev) => !prev);
   };
   return isEdit ? (
-    <div id={id}>
+    <div className={styles.editCostDetail} id={id}>
       <input defaultValue={title}></input>
       <input defaultValue={cost} type="number"></input>
-      <button onClick={saveChanges}>save</button>
-      <button onClick={() => onRemove(id)}>Delete</button>
+      <div>
+        <button onClick={saveChanges}>save</button>
+        <button onClick={() => onRemove(id)}>Delete</button>
+      </div>
     </div>
   ) : (
-    <div id={id}>
+    <div className={styles.costDetail} id={id}>
       <span>{title}</span>
       <span>{cost}</span>
-      <button onClick={toggleEdit}>edit</button>
-      <button onClick={() => onRemove(id)}>Delete</button>
+      <div>
+        <button onClick={toggleEdit}>edit</button>
+        <button onClick={() => onRemove(id)}>Delete</button>
+      </div>
     </div>
   );
 }

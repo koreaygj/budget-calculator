@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import CostDetail from "./CostDetail";
+import { useParams } from "react-router-dom";
+import styles from "./styles/CostDetails.module.css";
 
 function ConstDetail({ costPlans }) {
+  const { id } = useParams();
   const [getCostPlans, setCostPlans] = useState(costPlans);
   useEffect(() => {
     setCostPlans(() => costPlans);
@@ -27,11 +30,11 @@ function ConstDetail({ costPlans }) {
     });
   };
   const updateLocalStorage = () => {
-    localStorage.setItem("CostDetails", JSON.stringify(getCostPlans));
+    localStorage.setItem(`CostDetails${id}`, JSON.stringify(getCostPlans));
   };
 
   return (
-    <div>
+    <div className={styles.costDetailContainer}>
       {getCostPlans.map((costPlan) => {
         return (
           <CostDetail
