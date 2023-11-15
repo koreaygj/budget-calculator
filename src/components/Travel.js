@@ -1,37 +1,27 @@
 import { useState } from "react";
 
-function Travel({ name, id }) {
-  const [getName, setName] = useState(name);
-  const savedList = JSON.parse(localStorage.getItem("TravelList"));
+function Travel({ name, id, onEdit, onRemove }) {
   const [isEdit, setIsEdit] = useState(false);
   const saveChanges = (event) => {
     toggleEdit();
     const editedName = event.target.parentElement.childNodes[0].value;
-    setName(() => editedName);
-    savedList.map((destination) => {
-      if (destination.id === id) {
-        destination.name = editedName;
-      }
-    });
-    updateLocalStorage();
+    return onEdit(id, editedName);
   };
-  const updateLocalStorage = () => {
-    localStorage.setItem("TravelList", JSON.stringify(savedList));
-  };
+
   const toggleEdit = () => {
     setIsEdit((prev) => !prev);
   };
   return isEdit ? (
     <div id={id}>
-      <input defaultValue={getName}></input>
+      <input defaultValue={name}></input>
       <button onClick={saveChanges}>save</button>
-      <button>Delete</button>
+      <button onClick={() => onRemove(id)}>Delete</button>
     </div>
   ) : (
-    <div>
-      <a href={`./travel/${getName}`}>{getName}</a>
+    <div id={id}>
+      <a href={`./travel/${name}`}>{name}</a>
       <button onClick={toggleEdit}>edit</button>
-      <button>Delete</button>
+      <button onClick={() => onRemove(id)}>Delete</button>
     </div>
   );
 }

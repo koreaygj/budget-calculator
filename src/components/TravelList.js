@@ -8,6 +8,26 @@ function TravelList({ travelList }) {
       return travelList;
     });
   }, [travelList]);
+
+  const onEdit = (id, name) => {
+    setTravelList(() => {
+      return getTravelList.map((plan) =>
+        plan.id === id ? { ...plan, name: name } : plan
+      );
+    });
+  };
+
+  const onRemove = (id) => {
+    setTravelList(() => {
+      return getTravelList.filter((plan) => plan.id !== id);
+    });
+  };
+  const updateLocalStorage = () => {
+    localStorage.setItem("TravelList", JSON.stringify(getTravelList));
+  };
+  useEffect(() => {
+    updateLocalStorage();
+  }, [getTravelList]);
   return (
     <div>
       {getTravelList.map((destination) => {
@@ -16,6 +36,8 @@ function TravelList({ travelList }) {
             name={destination.name}
             key={destination.id}
             id={destination.id}
+            onEdit={onEdit}
+            onRemove={onRemove}
           />
         );
       })}
