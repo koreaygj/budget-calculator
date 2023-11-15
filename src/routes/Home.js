@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import TravelList from "../components/TravelList";
+import styles from "./styles/Home.module.css";
 
 function Home() {
   const [travelList, setTravelList] = useState(() => {
@@ -21,23 +22,29 @@ function Home() {
   const saveLocalStorage = () => {
     localStorage.setItem("TravelList", JSON.stringify(travelList));
   };
+  const deleteAll = () => {
+    setTravelList(() => []);
+  };
   useEffect(() => {
     saveLocalStorage();
   }, [travelList]);
   return (
-    <div>
-      <h1>Travel List</h1>
-      <div className="travel-container">
-        <form onSubmit={addTravelPlan}>
+    <div className={styles.mainView}>
+      <h1 className={styles.title}>Travel List</h1>
+      <div className={styles.travelContainer}>
+        <form className={styles.travelForm} onSubmit={addTravelPlan}>
           <input
+            className={styles.inputField}
             required
             type="text"
             placeholder="insert travel destination"
           ></input>
-          <button>submit</button>
+          <button className={styles.submitButton}>submit</button>
         </form>
         <TravelList travelList={travelList} />
-        <button>Delete All</button>
+        <button className={styles.deleteButton} onClick={deleteAll}>
+          Delete All
+        </button>
       </div>
     </div>
   );

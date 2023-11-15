@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Travel from "./Travel";
+import styles from "./styles/TravelList.module.css";
 
 function TravelList({ travelList }) {
   const [getTravelList, setTravelList] = useState(travelList);
@@ -30,7 +31,7 @@ function TravelList({ travelList }) {
     localStorage.setItem("TravelList", JSON.stringify(getTravelList));
   };
   return (
-    <div>
+    <div className={styles.travelListContainer}>
       {getTravelList.map((destination) => {
         return (
           <Travel
