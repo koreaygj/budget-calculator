@@ -3,7 +3,7 @@ import CostDetail from "./CostDetail";
 import { useParams } from "react-router-dom";
 import styles from "./styles/CostDetails.module.css";
 
-function ConstDetail({ costPlans }) {
+function ConstDetail({ costPlans, onChange }) {
   const { id } = useParams();
   const [getCostPlans, setCostPlans] = useState(costPlans);
   useEffect(() => {
@@ -22,12 +22,14 @@ function ConstDetail({ costPlans }) {
           : costPlan
       );
     });
+    onChange(`id: ${id} 가  수정`);
   };
 
   const onRemove = (id) => {
     setCostPlans((costPlans) => {
       return costPlans.filter((costPlan) => costPlan.id !== id);
     });
+    onChange("삭제");
   };
   const updateLocalStorage = () => {
     localStorage.setItem(`CostDetails${id}`, JSON.stringify(getCostPlans));

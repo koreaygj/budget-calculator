@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Travel from "./Travel";
 import styles from "./styles/TravelList.module.css";
 
-function TravelList({ travelList }) {
+function TravelList({ travelList, onChange }) {
   const [getTravelList, setTravelList] = useState(travelList);
   useEffect(() => {
     setTravelList(() => {
@@ -20,12 +20,14 @@ function TravelList({ travelList }) {
         plan.id === id ? { ...plan, name: name } : plan
       );
     });
+    onChange(`id: ${id} 가  수정`);
   };
 
   const onRemove = (id) => {
     setTravelList((travelList) => {
       return travelList.filter((plan) => plan.id !== id);
     });
+    onChange("delete");
   };
   const updateLocalStorage = () => {
     localStorage.setItem("TravelList", JSON.stringify(getTravelList));
