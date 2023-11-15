@@ -28,7 +28,7 @@ function Travel({ name, id, onEdit, onRemove }) {
     <div className={styles.travelList} id={id}>
       <span onClick={showPlanDetail}>{name}</span>
       <div>
-        <button onClick={toggleEdit}>edit</button>
+        <button onClick={toggleEdit}>Edit</button>
         <button onClick={() => onRemove(id)}>Delete</button>
       </div>
     </div>

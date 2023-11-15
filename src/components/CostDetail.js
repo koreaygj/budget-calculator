@@ -29,7 +29,7 @@ function CostDetail({ title, cost, id, onEdit, onRemove }) {
       <span>{title}</span>
       <span>{cost}</span>
       <div>
-        <button onClick={toggleEdit}>edit</button>
+        <button onClick={toggleEdit}>Edit</button>
         <button onClick={() => onRemove(id)}>Delete</button>
       </div>
     </div>

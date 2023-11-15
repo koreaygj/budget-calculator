@@ -59,6 +59,7 @@
 
 .costDetail button {
   border: none;
+  margin: 3px;
   font-size: 15px;
   border-radius: 3px;
   background-color: #b0a695;
