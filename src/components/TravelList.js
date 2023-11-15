@@ -14,16 +14,16 @@ function TravelList({ travelList }) {
   }, [getTravelList]);
 
   const onEdit = (id, name) => {
-    setTravelList(() => {
-      return getTravelList.map((plan) =>
+    setTravelList((travelList) => {
+      return travelList.map((plan) =>
         plan.id === id ? { ...plan, name: name } : plan
       );
     });
   };
 
   const onRemove = (id) => {
-    setTravelList(() => {
-      return getTravelList.filter((plan) => plan.id !== id);
+    setTravelList((travelList) => {
+      return travelList.filter((plan) => plan.id !== id);
     });
   };
   const updateLocalStorage = () => {
