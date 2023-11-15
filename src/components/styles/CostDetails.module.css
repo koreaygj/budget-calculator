@@ -1,0 +1,75 @@
+.costDetailContainer {
+  width: 100%;
+  background: #ebe3d5;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.editCostDetail {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #ebe3d5;
+  transition: background-color 0.2s, color 0.2s;
+  display: flex;
+  justify-content: space-between;
+  color: #776b5d;
+}
+
+.editCostDetail input {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+  font-size: 15px;
+  background-color: #f3eeea;
+  color: #776b5d;
+}
+
+.editCostDetail:hover {
+  background-color: #ebe3d5;
+  color: white;
+  cursor: pointer;
+}
+
+.editCostDetail button {
+  border: none;
+  font-size: 13px;
+  border-radius: 3px;
+  background-color: #b0a695;
+  color: #f9f9f9;
+}
+
+.costDetail {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background-color: #ebe3d5;
+  transition: background-color 0.2s, color 0.2s;
+  display: flex;
+  justify-content: space-between;
+  color: #776b5d;
+}
+
+.costDetail:hover {
+  background-color: #776b5d;
+  color: white;
+  cursor: pointer;
+}
+
+.costDetail button {
+  border: none;
+  font-size: 13px;
+  border-radius: 3px;
+  background-color: #b0a695;
+  color: #f9f9f9;
+}
+
+.costDetail button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.costDetail span {
+  font-size: 15px;
+}

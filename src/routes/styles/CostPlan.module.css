@@ -1,0 +1,67 @@
+.mainView {
+  background-color: #f3eeea;
+}
+
+.costDetailContainer {
+  margin: 0%;
+  background-color: #f3eeea;
+}
+
+.title {
+  padding-left: 20px;
+  color: #776b5d;
+}
+
+.detailForm {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.detailForm input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.inputField:hover,
+.inputField:focus {
+  border-color: #b0a695;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #b0a695;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hove,
+.submitButton:focus {
+  background-color: #776b5d;
+}
+
+.deleteButton {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #b0a695;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
