@@ -3,15 +3,17 @@ import CostDetail from "./CostDetail";
 import { useParams } from "react-router-dom";
 import styles from "./styles/CostDetails.module.css";
 
-function ConstDetail({ costPlans, onChange }) {
+function ConstDetail({ costPlans, onChange, getTotalCost }) {
   const { id } = useParams();
   const [getCostPlans, setCostPlans] = useState(costPlans);
   useEffect(() => {
     setCostPlans(() => costPlans);
+    calculateTotal();
   }, [costPlans]);
 
   useEffect(() => {
     updateLocalStorage();
+    calculateTotal();
   }, [getCostPlans]);
 
   const onEdit = (id, title, cost) => {
@@ -31,6 +33,15 @@ function ConstDetail({ costPlans, onChange }) {
     });
     onChange("삭제");
   };
+
+  const calculateTotal = () => {
+    let total = 0;
+    getCostPlans.map((plan) => {
+      total += parseInt(plan.cost);
+    });
+    return getTotalCost(total);
+  };
+
   const updateLocalStorage = () => {
     localStorage.setItem(`CostDetails${id}`, JSON.stringify(getCostPlans));
   };

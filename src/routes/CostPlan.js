@@ -14,6 +14,7 @@ function CostPlan() {
     const savedList = JSON.parse(localStorage.getItem(`CostDetails${id}`));
     return savedList !== null ? savedList : [];
   });
+  const [totalCost, setTotalCost] = useState(0);
 
   const showAlert = (message) => {
     setAlert({
@@ -50,6 +51,11 @@ function CostPlan() {
     setCostDetails(() => []);
     showAlert("모든 항목 삭제");
   };
+
+  const getTotalCost = (total) => {
+    setTotalCost(() => total);
+  };
+
   useEffect(() => {
     saveLocalStorage();
   }, [costDetails]);
@@ -66,7 +72,16 @@ function CostPlan() {
           <input type="number" placeholder="ex) 10000"></input>
           <button className={styles.submitButton}>submit</button>
         </form>
-        <CostPlanList costPlans={costDetails} onChange={onChange} />
+        <CostPlanList
+          costPlans={costDetails}
+          onChange={onChange}
+          getTotalCost={getTotalCost}
+        />
+        <div className={styles.costContainer}>
+          <div className={styles.cost}>
+            <span>Total: {totalCost}</span>
+          </div>
+        </div>
         <button className={styles.deleteButton} onClick={deleteAll}>
           Delete All
         </button>
