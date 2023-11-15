@@ -9,6 +9,10 @@ function TravelList({ travelList }) {
     });
   }, [travelList]);
 
+  useEffect(() => {
+    updateLocalStorage();
+  }, [getTravelList]);
+
   const onEdit = (id, name) => {
     setTravelList(() => {
       return getTravelList.map((plan) =>
@@ -25,9 +29,6 @@ function TravelList({ travelList }) {
   const updateLocalStorage = () => {
     localStorage.setItem("TravelList", JSON.stringify(getTravelList));
   };
-  useEffect(() => {
-    updateLocalStorage();
-  }, [getTravelList]);
   return (
     <div>
       {getTravelList.map((destination) => {

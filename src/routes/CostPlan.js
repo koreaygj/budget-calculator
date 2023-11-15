@@ -1,19 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CostPlanList from "../components/CostPlanList";
 
 function CostPlan() {
   const { id } = useParams();
-  const [costDetails, setCostDetails] = useState([]);
+  const [costDetails, setCostDetails] = useState(() => {
+    const savedList = JSON.parse(localStorage.getItem("CostDetails"));
+    return savedList !== null ? savedList : [];
+  });
   const addCostPlan = (event) => {
     event.preventDefault();
+    costPlan(event.target[0].value, event.target[1].value);
+  };
+
+  const costPlan = (title, cost) => {
     const costPlan = {
       id: Date.now(),
-      title: event.target[0].value,
-      cost: event.target[1].value,
+      title: title,
+      cost: cost,
     };
     setCostDetails((prev) => [...prev, costPlan]);
   };
+  const saveLocalStorage = () => {
+    localStorage.setItem("CostDetails", JSON.stringify(costDetails));
+  };
+  useEffect(() => {
+    saveLocalStorage();
+  }, [costDetails]);
 
   return (
     <div>
